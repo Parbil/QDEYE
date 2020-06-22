@@ -1,0 +1,6 @@
+﻿
+My  SQL Older versions havin issues with string length when we are goin with UTF so new version to be installed
+
+To have the access on the Local Database refer the below
+https://stackoverflow.com/questions/17975120/access-denied-for-user-rootlocalhost-using-password-yes-no-privileges
+
