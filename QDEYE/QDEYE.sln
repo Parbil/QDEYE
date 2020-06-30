@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QDEYE.Server", "QDEYE\Server\QDEYE.Server.csproj", "{FB884B6C-F5F4-4490-858C-A937FA0540E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QDEYE.Server", "QDEYE\Server\QDEYE.Server.csproj", "{FB884B6C-F5F4-4490-858C-A937FA0540E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QDEYE.Client", "QDEYE\Client\QDEYE.Client.csproj", "{78057715-7A68-4EE8-8FAA-CC50AFF731C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QDEYE.Client", "QDEYE\Client\QDEYE.Client.csproj", "{78057715-7A68-4EE8-8FAA-CC50AFF731C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QDEYE.Shared", "QDEYE\Shared\QDEYE.Shared.csproj", "{F2B44B86-0024-4844-B6FA-D8D1AC8C7343}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QDEYE.Shared", "QDEYE\Shared\QDEYE.Shared.csproj", "{F2B44B86-0024-4844-B6FA-D8D1AC8C7343}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

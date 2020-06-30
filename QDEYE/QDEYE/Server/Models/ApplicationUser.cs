@@ -8,5 +8,6 @@ namespace QDEYE.Server.Models
 {
     public class ApplicationUser : IdentityUser
     {
+
     }
 }

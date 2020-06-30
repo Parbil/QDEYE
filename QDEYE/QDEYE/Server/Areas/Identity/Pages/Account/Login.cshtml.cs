@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using QDEYE.Server.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace QDEYE.Server.Areas.Identity.Pages.Account
 {
@@ -136,6 +138,26 @@ namespace QDEYE.Server.Areas.Identity.Pages.Account
 
             ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
             return Page();
+        }
+        
+        public async Task<IActionResult> OnGetCallbackAsync(
+            string returnUrl = null, string remoteError = null)
+        {
+            // Get the information about the user from the external login provider
+            var GoogleUser = this.User.Identities.FirstOrDefault();
+            if (GoogleUser.IsAuthenticated)
+            {
+                var authProperties = new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    RedirectUri = this.Request.Host.Value
+                };
+                await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(GoogleUser),
+                authProperties);
+            }
+            return LocalRedirect("/");
         }
     }
 }

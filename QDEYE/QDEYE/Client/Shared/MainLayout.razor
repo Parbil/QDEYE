@@ -1,16 +1,24 @@
 ﻿@inherits LayoutComponentBase
+@*<div class="sidebar">
+        <NavMenu />
+    </div>
 
-<div class="sidebar">
-    <NavMenu />
-</div>
+    <div class="main">
+        <div class="top-row px-4 auth">
+            <LoginDisplay />
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
 
-<div class="main">
-    <div class="top-row px-4 auth">
+        <div class="content px-4">*@
+    <div class="header w-clearfix">
+        <div class="header-left">
+
+            <a href="#" class="header-logo w-inline-block"><img src="images/de-logo.svg" alt="Digital Work - Удобный инструмент для онлайн трудоустройства" class="image-2"></a>
+            <div class="descript">удобный Инструмент для<br>прокторинга онлайн тестов</div>
+        </div>
         <LoginDisplay />
-        <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        <div class="header-right"><a href="#" class="btn-lang-light w-button">Қаз</a><a data-w-id="e9cbb64a-396e-425a-6c42-a362744dd681" href="#" class="btn-signin-light w-button">войти</a></div>
     </div>
-
-    <div class="content px-4">
-        @Body
-    </div>
-</div>
+@Body
+@*</div>
+    </div>*@
