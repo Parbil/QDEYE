@@ -1,0 +1,37 @@
+﻿@inherits LayoutComponentBase
+
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+<div class="header inside w-clearfix">
+    <div class="header-left"><a href="#" class="header-logo w-inline-block"><img src="images/de-logo.svg" alt="Digital Work - Удобный инструмент для онлайн трудоустройства" class="image-2"></a></div>
+    <div class="header-right">
+        <AuthorizeView>
+            <Authorized>
+                <img src="images/MeAvatar.jpg" width="40" alt="" class="image-7">
+                <div class="text-block-3">
+                    <a href="authentication/profile">@context.User.Identity.Name!</a><br />
+                    <a href="" @onclick="BeginSignOut">Log out</a>
+                </div>
+            </Authorized>
+            @*<NotAuthorized>
+                    <a href="authentication/register">Register</a>
+                    <a href="authentication/login">Log in</a>
+                </NotAuthorized>*@
+        </AuthorizeView>
+
+    </div>
+</div>
+@Body
+@code{
+    private async Task BeginSignOut(MouseEventArgs args)
+    {
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
+}
+
+
+

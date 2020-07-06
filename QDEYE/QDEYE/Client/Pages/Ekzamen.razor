@@ -2,34 +2,37 @@
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using QDEYE.Shared
+@layout ExamLayout
 @attribute [Authorize]
 @inject HttpClient Http
+
 <body class="body-employee">
-    <div class="header inside w-clearfix">
-        <div class="header-left"><a href="#" class="header-logo w-inline-block"><img src="images/de-logo.svg" alt="Digital Work - Удобный инструмент для онлайн трудоустройства" class="image-2"></a></div>
-        <div class="header-right">
-            <img src="images/MeAvatar.jpg" width="40" alt="" class="image-7">
-            <div class="text-block-3">Алмат Курмашев</div>
-        </div>
-    </div>
+
     <div class="main-content user">
         <div class="de-exams-bg main w-container">
             <h3 class="heading main">Приветствуем, Алмат!</h3>
             <p class="form-paragraph subheader">Выберите экзамен из списка, чтобы сдать экзамен онлайн.</p>
-            <div class="exam-list all">
-                <div class="list-left">
-                    <h4 class="question">Экзамен 1</h4>
-                    <div class="text-block-4">Краткое описание первого экзамена</div>
-                </div>
-                <div class="list-right"><a href="digital-eye-speed-test.html" class="de-btn-80 w-button">Приступить</a></div>
-            </div>
-            <div class="exam-list">
-                <div class="list-left">
-                    <h4 class="question">Экзамен 2</h4>
-                    <div class="text-block-4">Краткое описание второго экзамена</div>
-                </div>
-                <div class="list-right"><a href="digital-eye-speed-test.html" class="de-btn-80 w-button">Приступить</a></div>
-            </div>
+            @if (forecasts == null)
+            {
+                <p><em>Loading...</em></p>
+            }
+            else
+            {
+
+                @foreach (var forecast in forecasts)
+                {
+                    <div class="exam-list">
+                        <div class="list-left">
+                            <h4 class="question">@forecast.name</h4>
+                            <div class="text-block-4">@forecast.description</div>
+                        </div>
+                        <div class="list-right"><a href="Speedtest" class="de-btn-80 w-button">Приступить</a></div>
+                    </div>
+                }
+
+
+            }
+
         </div>
     </div>
     <div class="content-bottom inside">
@@ -37,5 +40,17 @@
     </div>
 </body>
 @code {
+    private ExamsModel[] forecasts;
 
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            forecasts = await Http.GetFromJsonAsync<ExamsModel[]>("Exam/Get");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
 }

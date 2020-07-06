@@ -1,45 +1,45 @@
 ﻿@page "/speedtest"
+@layout ExamLayout
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using QDEYE.Shared
 @attribute [Authorize]
 @inject HttpClient Http
+@inject IJSRuntime JSRuntime;
 
-    <body class="body-employee">
-        <div class="header inside w-clearfix">
-            <div class="header-left"><a href="#" class="header-logo w-inline-block"><img src="images/de-logo.svg" alt="Digital Work - Удобный инструмент для онлайн трудоустройства" class="image-2"></a></div>
-            <div class="header-right">
-                <img src="images/MeAvatar.jpg" width="40" alt="" class="image-7">
-                <div class="text-block-3">Алмат Курмашев</div>
-            </div>
+<body class="body-employee">
+    
+    <div class="main-content user">
+        <div class="de-exams-bg w-container">
+            <h3 class="heading">Проверка подключения</h3>
+            <p class="form-paragraph subheader">Пожалуйста, убедитесь в том, что все устройства полностью функционируют.</p>
+            <div class="icons-row speed">
+                <div class="test-webcam speed">
+                    <div class="test"><img src="images/icon-webcam.svg" width="32" alt=""></div>
+                    <h1 class="heading-3">Веб-камера</h1>
+                    <div class="text-block-6" id="webcam">не работает</div>
+                </div>
+                <div class="test-webcam speed">
+                    <div class="test"><img src="images/icon-mic.svg" width="32" alt=""></div>
+                    <h1 class="heading-3">Микрофон</h1>
+                    <div class="text-block-6" id="micophone">не работает</div>
+                </div>
+                <div class="test-webcam speed">
+                    <div class="test"><img src="images/icon-speed.svg" width="32" alt=""></div>
+                    <h1 class="heading-3">Интернет</h1>
+                    <div class="text-block-6" id="progress">2 Mb/s</div>
+                </div>
+            </div><a href="exam" class="de-btn-80 w-button">Начать экзамен</a>
         </div>
-        <div class="main-content user">
-            <div class="de-exams-bg w-container">
-                <h3 class="heading">Проверка подключения</h3>
-                <p class="form-paragraph subheader">Пожалуйста, убедитесь в том, что все устройства полностью функционируют.</p>
-                <div class="icons-row speed">
-                    <div class="test-webcam speed">
-                        <div class="test"><img src="images/icon-webcam.svg" width="32" alt=""></div>
-                        <h1 class="heading-3">Веб-камера</h1>
-                        <div class="text-block-6">Работает</div>
-                    </div>
-                    <div class="test-webcam speed">
-                        <div class="test"><img src="images/icon-mic.svg" width="32" alt=""></div>
-                        <h1 class="heading-3">Микрофон</h1>
-                        <div class="text-block-6">Работает</div>
-                    </div>
-                    <div class="test-webcam speed">
-                        <div class="test"><img src="images/icon-speed.svg" width="32" alt=""></div>
-                        <h1 class="heading-3">Интернет</h1>
-                        <div class="text-block-6">2 Mb/s</div>
-                    </div>
-                </div><a href="digital-eye-ekzamen-1.html" class="de-btn-80 w-button">Начать экзамен</a>
-            </div>
-        </div>
-        <div class="content-bottom inside">
-            <div class="copyright">© 2020. Inspired by</div><img src="images/logo-aiva-footer.svg" alt="">
-        </div>
-    </body>
+    </div>
+    <div class="content-bottom inside">
+        <div class="copyright">© 2020. Inspired by</div><img src="images/logo-aiva-footer.svg" alt="">
+    </div>
+</body>
 @code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("InitiateSpeedDetection");
 
+    }
 }

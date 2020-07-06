@@ -35,9 +35,17 @@ namespace QDEYE.Server.Controllers
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             UserDetails userDetails = new UserDetails();
+            var details = new UserDetails();
             userDetails.UserId = userId;
-            var details = _context.UserDetails.Where(i => i.UserId == userDetails.UserId).SingleOrDefault();
-            if (details != null)
+            try
+            {
+                details = _context.UserDetails.Where(i => i.UserId == userDetails.UserId).SingleOrDefault();
+            }
+            catch(Exception ex) 
+            { 
+            
+            }
+            if (details!=null)
             {
                 details.IIN = userdata.IIN;
                 details.SurName = userdata.SurName;

@@ -3,52 +3,55 @@
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using QDEYE.Shared
 @attribute [Authorize]
+@inject NavigationManager NavigationManager
 @inject HttpClient Http
-    <body class="body-employee">
-        <div class="header-auth">
-            <div class="de-header-left"><a href="#" class="header-logo w-inline-block"><img src="images/de-logo.svg" alt="Digital Work - Удобный инструмент для онлайн трудоустройства" class="image-2"></a></div>
-        </div>
-        <div class="main-content">
-            <div class="form anketa w-container">
-                <div class="form-header">
-                    <h1 class="text-header">Анкета</h1>
-                    <div class="text-block-2">Пожалуйста, заполните все поля и укажите свой номер ИИН.</div>
-                </div>
-                <div class="form-bg">
-                    <div class="form-register w-form">
-                        <form id="wf-form-SignIn" name="wf-form-SignIn" data-name="SignIn" redirect="/digital-eye-faceid" data-redirect="/digital-eye-faceid" class="form-2">
+<body class="body-employee">
+    <div class="header-auth">
+        <div class="de-header-left"><a href="#" class="header-logo w-inline-block"><img src="images/de-logo.svg" alt="Digital Work - Удобный инструмент для онлайн трудоустройства" class="image-2"></a></div>
+    </div>
+    <div class="main-content">
+        <div class="form anketa w-container">
+            <div class="form-header">
+                <h1 class="text-header">Анкета</h1>
+                <div class="text-block-2">Пожалуйста, заполните все поля и укажите свой номер ИИН.</div>
+            </div>
+            <div class="form-bg">
+                <div class="form-register w-form">
+                    <form id="wf-form-SignIn" name="wf-form-SignIn" data-name="SignIn" class="form-2">
                         <label for="node-2" class="field-label">Фамилия</label>
-                        <input type="text" class="field w-input" autofocus="true" maxlength="256" data-name="ФИО" placeholder="Аскаров" id="node" required="" @bind-value="userDetails.SurName">
+                        <input type="text" class="field w-input" autofocus="true" maxlength="256"  placeholder="Аскаров" id="node" required="" @bind-value="userDetails.SurName" />
                         <label for="node-3" class="field-label">Имя</label>
-                        <input type="text" placeholder="Аскар" maxlength="256" data-name="Имя" required="" id="node-2" class="field w-input" @bind-value="userDetails.Name">
+                        <input type="text" placeholder="Аскар" maxlength="256"  required="" id="node-2" class="field w-input" @bind-value="userDetails.Name" />
                         <label for="node-2" class="field-label">Отчество</label>
-                        <input type="text" placeholder="Аскарович" maxlength="256" data-name="Имя" id="node-2" class="field w-input" @bind-value="userDetails.MiddleName">
+                        <input type="text" placeholder="Аскарович" maxlength="256"  id="node-2" class="field w-input" @bind-value="userDetails.MiddleName" />
                         <label for="IIN" class="field-label">ИИН</label>
-                        <input type="text" class="field w-input" maxlength="256" name="IIN" data-name="IIN" placeholder="Введите свой ИИН" id="IIN" required="" @bind-value="userDetails.IIN">
-                        <input type="submit" value="Далее" data-wait="Подождите..." class="de-btn-80 fullwidth w-button" @onclick="OnClick"></form>
-                        <div class="w-form-done">
-                            <div>Thank you! Your submission has been received!</div>
-                        </div>
-                        <div class="w-form-fail">
-                            <div>Oops! Something went wrong while submitting the form.</div>
-                        </div>
+                        <input type="text" class="field w-input" maxlength="256" name="IIN"  placeholder="Введите свой ИИН" id="IIN" required="" @bind-value="userDetails.IIN" />
+                        <input type="submit" value="Далее" data-wait="Подождите..." class="de-btn-80 fullwidth w-button" @onclick="OnClick" />
+                    </form>
+                    <div class="w-form-done">
+                        <div>Thank you! Your submission has been received!</div>
+                    </div>
+                    <div class="w-form-fail">
+                        <div>Oops! Something went wrong while submitting the form.</div>
                     </div>
                 </div>
             </div>
         </div>
-       </body>
+    </div>
+</body>
 
 @code {
-    private UserDetailsModel userDetails=new UserDetailsModel();
+    private UserDetailsModel userDetails = new UserDetailsModel();
     private async void OnClick()
     {
         try
         {
-            await Http.PostAsJsonAsync("UserData/Post", userDetails);
+           var rault=  await Http.PostAsJsonAsync("UserData/Post", userDetails);
+            NavigationManager.NavigateTo("faceid");
         }
         catch (AccessTokenNotAvailableException exception)
         {
-            exception.Redirect();
+            NavigationManager.NavigateTo("faceid");
         }
     }
 
